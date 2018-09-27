@@ -49,7 +49,7 @@
   tags:
     - facts
 
-- import_tasks: pre-upgrade.yml
+#- import_tasks: pre-upgrade.yml
 
 - name: ensure docker-ce repository public key is installed
   action: "{{ docker_repo_key_info.pkg_key }}"
@@ -169,6 +169,7 @@
     name: docker
     state: started
   when: docker_task_result is not changed
+  ignore_errors: true
 
 - name: flush handlers so we can wait for docker to come up
   meta: flush_handlers
